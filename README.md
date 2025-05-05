@@ -1,30 +1,76 @@
-## Tipo e descrição 
+## License
 
-Os seguintes labels devem ser utilizados para a realização dos commits desse projeto:
+This project is licensed under the terms of the [GNU General Public License v3.0](LICENSE).
+© 2025 GabrielHCoimbra
 
-- `feat`- Commits do tipo feat indicam que seu trecho de código está incluindo um **novo recurso** (se relaciona com o MINOR do versionamento semântico).
+# 📦 GymManager — Sistema de Gestão de Academias
 
-- `fix` - Commits do tipo fix indicam que seu trecho de código commitado está **solucionando um problema** (bug fix), (se relaciona com o PATCH do versionamento semântico).
+> **Status:** Em desenvolvimento  
+> **Tecnologias-base:** PHP (planejando integração com Laravel e React)
 
-- `docs` - Commits do tipo docs indicam que houveram **mudanças na documentação**, como por exemplo no Readme do seu repositório. (Não inclui alterações em código).
+## 📝 Sobre o projeto
 
-- `test` - Commits do tipo test são utilizados quando são realizadas **alterações em testes**, seja criando, alterando ou excluindo testes unitários. (Não inclui alterações em código)
+Este projeto nasceu como uma tentativa de recuperar parte do meu **projeto final do curso técnico em Desenvolvimento Web**. Originalmente, o sistema era voltado para a **gestão de uma clínica**, mas após a perda do projeto completo, decidi mudar o rumo da ideia para algo mais motivador e útil: um **sistema para gestão de academias**.
 
-- `build` - Commits do tipo build são utilizados quando são realizadas modificações em **arquivos de build e dependências**.
+A ideia principal aqui é usar esse esqueleto como uma base para **praticar principalmente o uso de bancos de dados**, enquanto exploro também recursos modernos da web como o **framework Laravel** no backend e **React** no frontend.
 
-- `perf` - Commits do tipo perf servem para identificar quaisquer alterações de código que estejam relacionadas a **performance**.
+## 🎯 Objetivo
 
-- `style` - Commits do tipo style indicam que houveram alterações referentes a **formatações de código**, semicolons, trailing spaces, lint... (Não inclui alterações em código).
+Desenvolver um sistema funcional e escalável para academias, com foco em:
 
-- `refactor` - Commits do tipo refactor referem-se a mudanças devido a **refatorações que não alterem sua funcionalidade**, como por exemplo, uma alteração no formato como é processada determinada parte da tela, mas que manteve a mesma funcionalidade, ou melhorias de performance devido a um code review.
+- Aprendizado e prática com banco de dados relacionais (MySQL ou PostgreSQL)
+- Integração entre backend em PHP/Laravel e frontend em React
+- Criação de um sistema modular que possa ser ampliado com novas funcionalidades
 
-- `chore` - Commits do tipo chore indicam **atualizações de tarefas** de build, configurações de administrador, pacotes... como por exemplo adicionar um pacote no gitignore. (Não inclui alterações em código)
+## ⚙️ Funcionalidades fundamentais planejadas
 
-- `ci` - Commits do tipo ci indicam mudanças relacionadas a **integração contínua** (_continuous integration_).
+Uma boa plataforma de gestão de academias deve contar com ao menos os seguintes recursos:
 
-- `raw` - Commits do tipo raw indicam mudanças relacionadas a arquivos de configurações, dados, features, parâmetros.
+### 👤 Gestão de Alunos
+- Cadastro, edição e exclusão de alunos
+- Histórico de presença e frequência
+- Planos contratados e vencimentos
 
-- `cleanup` - Commits do tipo cleanup são utilizados para remover código comentado, trechos desnecessários ou qualquer outra forma de limpeza do código-fonte, visando aprimorar sua legibilidade e manutenibilidade.
+### 📅 Gestão de Planos
+- Criação de planos mensais, trimestrais e anuais
+- Associação de alunos aos planos
+- Notificações de vencimento ou inadimplência
 
-- `remove` - Commits do tipo remove indicam a exclusão de arquivos, diretórios ou funcionalidades obsoletas ou não utilizadas, reduzindo o tamanho e a complexidade do projeto e mantendo-o mais organizado.
+### 🏋️‍♀️ Controle de Aulas e Treinadores
+- Cadastro de aulas e horários
+- Registro de instrutores responsáveis
+- Matrícula de alunos nas aulas
+
+### 💳 Pagamentos
+- Registro de pagamentos realizados
+- Geração de relatórios de inadimplência
+- Integração futura com meios de pagamento
+
+### 📊 Relatórios e Painel Administrativo
+- Dashboards com dados sobre frequência, faturamento e planos ativos
+- Filtros por período, categoria, status de alunos etc.
+
+### 🔐 Controle de Acesso
+- Níveis de permissão (admin, instrutor, aluno)
+- Login seguro com autenticação (possivelmente JWT ou Laravel Sanctum)
+
+## 🧪 Objetivo Educacional
+
+Este projeto é também uma **plataforma de aprendizado pessoal**, onde pretendo:
+
+- Reforçar a lógica de modelagem de dados relacionais
+- Explorar boas práticas com Laravel (roteamento, controllers, migrations)
+- Experimentar com React e APIs RESTful
+- Testar e versionar tudo usando Git
+
+## 📂 Estrutura inicial (em construção)
+
+----------------------------------
+
+
+## 🚀 Futuras melhorias
+
+-------------------------------
+
+
 
