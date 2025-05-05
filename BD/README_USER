@@ -1,0 +1,13 @@
+### Sistema de Gerenciamento de Fonoaudiologia
+
+### GH e cia
+
+Definições do sistema
+
+### Como importar a base de dados
+
+1- Cria uma base de dados com o nome sigma no servidor Mysql
+2- Importar a base de dados que está na pasta "Base de Dados"
+3- Entrar no sistema usando 
+    #Username: Admin
+    #Password: admin

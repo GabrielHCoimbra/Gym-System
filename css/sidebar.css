@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.ul-sidebar{
+    width: 15vw;
+    height: 100vh;
+}
+a{
+    text-decoration: none;
+    color: aquamarine;
+}

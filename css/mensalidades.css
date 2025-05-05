@@ -1,0 +1,52 @@
+div{
+    margin-left: 5px;
+}
+
+.pagamento{
+    margin: 4vh 80vw 4vh 0vw;
+    
+
+}
+
+.pagamento2{
+    color: #06003a;
+    background-color: rgba(6, 0, 58, 0.3);
+    padding: 5px;
+    border: #06003a solid 3px;
+    border-radius: 500px;
+}
+
+.pagamento2:hover{
+    color: aquamarine;
+    background-color: rgba(6, 0, 58, 0.6);
+
+}
+.ganhos{
+    padding: 5px;
+}
+
+
+
+.mensalidade{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    margin: 0% 0% 1% 0%;
+}
+
+.tabela{
+    margin: 15px 8px 5px 0px;
+}
+
+.tabela2{
+    width: 100%;
+    text-align: center;
+    border: 3px solid rgb(0, 0, 0)
+}
+
+th{
+    width: 6%;
+
+}
+
+.th{
+    border-right: 1px solid rgba(0, 0, 0, 0.7);
+}

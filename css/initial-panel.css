@@ -1,0 +1,14 @@
+*{
+    overflow-x: hidden;
+}
+.initial-panel-body{
+    /*display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;*/
+    display: grid;
+    grid-template-columns: 15vw 85vw;
+}
+.iframe{
+    width: 100%;
+    height: 90vh;
+}
