@@ -68,7 +68,9 @@ CREATE TABLE `conf_mensalidades` (
   `criado_por` int(11) NOT NULL,
   `data_criacao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificado_por` int(11) NOT NULL,
-  `data_modificacao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `data_modificacao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(nr_paciente) REFERENCES paciente (nr_paciente)
+  
 );
 
 -- --------------------------------------------------------
@@ -85,7 +87,8 @@ CREATE TABLE `inscricao_detalhes` (
   `valor_mensalidade` int(11) NOT NULL DEFAULT '525',
   `data_deposito` date NOT NULL,
   `criado_por` int(11) NOT NULL,
-  `data_criacao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `data_criacao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(nr_paciente) REFERENCES paciente (nr_paciente)
 );
 
 --
@@ -101,7 +104,8 @@ CREATE TABLE `matricula` (
   `data_modificado_pagamento` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `criado_por` int(11) DEFAULT NULL,
   `modificado_por` int(11) DEFAULT NULL,
-  `ano` year(4) DEFAULT NULL
+  `ano` year(4) DEFAULT NULL,
+  FOREIGN KEY(nr_paciente) REFERENCES paciente (nr_paciente)
 );
 
 -- --------------------------------------------------------
@@ -184,7 +188,9 @@ CREATE TABLE `mensalidades` (
   `Outu` char(1) DEFAULT NULL,
   `Nov` char(1) DEFAULT NULL,
   `Dez` char(1) DEFAULT NULL,
-  `Ano` year(4) NOT NULL
+  `Ano` year(4) NOT NULL,
+  FOREIGN KEY(nr_paciente) REFERENCES paciente (nr_paciente)
+ 
 );
 
 -- --------------------------------------------------------
@@ -321,17 +327,5 @@ ALTER TABLE `tabela_usuarios`
 
 --
 
-Delimiter $$
-CREATE TRIGGER Tg_atualiza_estoque AFTER INSERT
-ON consultas
-FOR EACH ROW
-BEGIN
-  IF new.Id_produto > 0 THEN
-   UPDATE Estoque
-   SET qte_produto = qte_produto - new.Qte_produto
-   WHERE Id_produto = new.Id_produto;
-  END IF;
-END$$
-Delimiter
 --
 

@@ -208,7 +208,7 @@
                   
                 <?php 
                 
-                  
+                if ($_SESSION['usuarioNivelAcesso'] == 1) {
                   while($linhas = mysqli_fetch_array($resultado)){
                     echo "<tr>";
                       $nr_paciente=$linhas['nr_paciente'];
@@ -423,6 +423,220 @@
                     
                     echo "</tr>";
                   }
+                }elseif ($_SESSION['usuarioNivelAcesso'] == 3) {
+                  while($linhas = mysqli_fetch_array($resultado)){
+                    echo "<tr>";
+                      $nr_paciente=$linhas['nr_paciente'];
+                      echo "<td>".$linhas['nome_paciente']."</td>";
+                                  
+                      $Mensal = @mysqli_query($conectar,"SELECT * FROM mensalidades WHERE nr_paciente='$nr_paciente'");
+                      $Est = mysqli_fetch_array($Mensal);
+                      $taxas = @mysqli_query($conectar,"SELECT * FROM inscricao_detalhes WHERE nr_paciente='$nr_paciente'");
+                      $taxas = mysqli_fetch_assoc($taxas);
+                      $mes=0;
+                      ?>
+                      
+                      <td>
+                        <button type="button" href="#" class="btn btn-xs btn-success btn-block" style="background:green" ><i class="" data-toggle="tooltip" title="Detalhes do pagamento"></i><?= $taxas['valor_inscricao'] ?></button>
+                      </td>
+                      <td><?php if(empty($Est['Jan'])){ ?>
+                          
+                          <button type="button" href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-whatever1="Fev" data-whatever2="<?php echo $Est['Fev'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = @mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Fev'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+                            $mes++;
+                          ?>
+                          
+                          <button type="button" href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Fev" data-whatever2="<?php echo $Est['Fev'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+                      <td><?php if(empty($Est['Fev'])){ ?>
+                          
+                          <button type="button" href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-whatever1="Fev" data-whatever2="<?php echo $Est['Fev'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = @mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Fev'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+                            $mes++;
+                          ?>
+                          
+                          <button type="button" href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Fev" data-whatever2="<?php echo $Est['Fev'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+
+                      <td><?php if(empty($Est['Mar'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Fev'])){ ?> disabled="" <?php } ?>  href="#fazerPagamento"  class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Mar" data-whatever2="<?php echo $Est['Mar'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Mar'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          
+                          <button type="button" <?php if(empty($Est['Fev'])) echo "Disabled" ?> href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Mar" data-whatever2="<?php echo $Est['Mar'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+
+                      <td><?php if(empty($Est['Abr'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Mar'])){ ?> disabled="" <?php } ?> href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Abr" data-whatever2="<?php echo $Est['Abr'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Abr'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          <button type="button" <?php if(empty($Est['Mar'])){ ?> disabled="" <?php } ?> href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Abr" data-whatever2="<?php echo $Est['Abr'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+                                  
+                      <td><?php if(empty($Est['Mai'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Abr'])){ ?> disabled="" <?php } ?> href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Mai" data-whatever2="<?php echo $Est['Mai'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Mai'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          <button type="button" <?php if(empty($Est['Abr'])){ ?> disabled="" <?php } ?> href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Mai" data-whatever2="<?php echo $Est['Mai'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+
+                      <td><?php if(empty($Est['Jun'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Mai'])){ ?> disabled="" <?php } ?> href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Jun" data-whatever2="<?php echo $Est['Jun'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Jun'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          <button type="button" <?php if(empty($Est['Mai'])){ ?> disabled="" <?php } ?> href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Jun" data-whatever2="<?php echo $Est['Jun'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+
+                      <td><?php if(empty($Est['Jul'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Jun'])){ ?> disabled="" <?php } ?> href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Jul" data-whatever2="<?php echo $Est['Jul'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Jul'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          <button type="button" <?php if(empty($Est['Jun'])){ ?> disabled="" <?php } ?> href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Jul" data-whatever2="<?php echo $Est['Jul'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+
+                      <td><?php if(empty($Est['Ago'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Jul'])){ ?> disabled="" <?php } ?> href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Ago" data-whatever2="<?php echo $Est['Ago'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Ago'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          <button type="button" <?php if(empty($Est['Jul'])){ ?> disabled="" <?php } ?> href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Ago" data-whatever2="<?php echo $Est['Ago'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+
+                      <td><?php if(empty($Est['Sete'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Ago'])){ ?> disabled="" <?php } ?> href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Sete" data-whatever2="<?php echo $Est['Sete'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Sete'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          <button type="button" <?php if(empty($Est['Ago'])){ ?> disabled="" <?php } ?> href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Sete" data-whatever2="<?php echo $Est['Sete'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+
+                      <td><?php if(empty($Est['Outu'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Sete'])){ ?> disabled="" <?php } ?> href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Outu" data-whatever2="<?php echo $Est['Outu'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Outu'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          <button type="button" <?php if(empty($Est['Sete'])){ ?> disabled="" <?php } ?> href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Outu" data-whatever2="<?php echo $Est['Outu'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>     
+
+                      <td><?php if(empty($Est['Nov'])){ ?>
+                          
+                          <button type="button" <?php if(empty($Est['Outu'])){ ?> disabled="" <?php } ?> href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Nov" data-whatever2="<?php echo $Est['Nov'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Nov'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+
+                            $mes++;
+                          ?>
+                          <button type="button" <?php if(empty($Est['Outu'])){ ?> disabled="" <?php } ?> href="#anularPagamento" class=" btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Nov" data-whatever2="<?php echo $Est['Nov'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>
+                      <td><?php if(empty($Est['Dez'])){ ?>
+                          
+                          <button type="button" href="#fazerPagamento" class="btn btn-xs btn-danger btn-block" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-whatever1="Fev" data-whatever2="<?php echo $Est['Fev'];  ?>"><i data-toggle="tooltip" title="Fazer pagamento"></i><b>x</b></button>
+
+                        <?php }else { 
+
+                            $MensalDetalhes = @mysqli_query($conectar,"SELECT * from conf_mensalidades JOIN tabela_usuarios ON conf_mensalidades.criado_por = tabela_usuarios.id_usuario where nr_paciente='$nr_paciente' AND mes='Fev'");
+                            $rs = mysqli_fetch_array($MensalDetalhes);
+                            $mes++;
+                          ?>
+                          
+                          <button type="button" href="#anularPagamento" class="btn btn-xs btn-success btn-block" style="background:green" data-whatever4="<?php echo $rs['recibo'];  ?>"  data-whatever9="<?php echo $rs['nome'];  ?>"  data-whatever8="<?php echo $rs['data_deposito'];  ?>" data-whatever5="<?php echo $rs['data_criacao'];  ?>" data-whatever3="<?php echo $linhas['nome_paciente'];?>" data-toggle="modal" data-whatever="<?php echo $linhas['nr_paciente'];?>" data-whatever1="Fev" data-whatever2="<?php echo $Est['Fev'];  ?>"><i class="" data-toggle="tooltip" title="Detalhes do pagamento"><?= @$taxas['valor_mensalidade'] ?></i></button>
+                          
+                        <?php } ?>
+                      </td>      
+                      <td>
+                        <input type="button" class=" btn btn-xs btn-success btn-block" style="background:green" id="colecta" value="<?=$taxas['valor_inscricao']+$mes*$taxas['valor_mensalidade']; ?>"></input>
+                      </td>                 
+
+                                              
+                      <?php
+                  } 
+                } 
                 ?>
               </tbody>
               </table>

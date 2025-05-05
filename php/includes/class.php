@@ -614,8 +614,7 @@ class administracao extends conexao {
         if($stmt->rowCount() == 0){
             $query = "INSERT INTO `mensalidades`(`nr_paciente`, `Jan`, `Fev`, `Mar`, `Abr`, `Mai`, `Jun`, `Jul`, `Ago`, `Sete`, `Outu`, `Nov`, `Dez`, `Ano`) VALUES ('$q',0,0,0,0,0,0,0,0,0,0,0,0,?)";
             $stmt = $this->connect()->prepare($query);
-            $stmt->execute([date('y')]);
-            if($stmt->execute()){
+            if($stmt->execute([date('y')])){
                 return 1;
             } else {
                 echo "<p class='text-center text-capitalize alert alert-danger'>Erro: " . $stmt->error . "!</p>";
@@ -629,6 +628,7 @@ class administracao extends conexao {
             $stmt = $this->connect()->prepare($query);
             if ($stmt->execute([$nr_paciente, $Mes, $recibo, $data_deposito, date('Y'), $usuario_logado])) {
                 $this->criar_paciente_mensalidade($nr_paciente);
+                
                 $query = "UPDATE mensalidades SET $Mes = 1 WHERE mensalidades.nr_paciente = '$nr_paciente' AND Ano=?";
                 $stmt = $this->connect()->prepare($query);
                 if ($stmt->execute([date('Y')])) {
